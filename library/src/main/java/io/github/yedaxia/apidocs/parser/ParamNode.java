@@ -3,7 +3,7 @@ package io.github.yedaxia.apidocs.parser;
 /**
  * a param node corresponds to a request parameter
  */
-public class ParamNode {
+public class ParamNode extends ClassNode {
 
 	public String name;
 	public String type;
@@ -33,14 +33,6 @@ public class ParamNode {
 
 	public void setRequired(boolean required) {
 		this.required = required;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
 	}
 
 	public boolean isJsonBody() {

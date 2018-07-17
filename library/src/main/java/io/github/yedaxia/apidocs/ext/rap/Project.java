@@ -1,7 +1,5 @@
 package io.github.yedaxia.apidocs.ext.rap;
 
-import io.github.yedaxia.apidocs.DocContext;
-import io.github.yedaxia.apidocs.IResponseWrapper;
 import io.github.yedaxia.apidocs.ParseUtils;
 import io.github.yedaxia.apidocs.Utils;
 import io.github.yedaxia.apidocs.parser.*;
@@ -179,6 +177,7 @@ class Project {
                 action.setRequestType(ActionType.valueOf(methods.get(0)).type);
                 
                 for (ParamNode paramNode : requestNode.getParamNodes()) {
+                    /*--::start 20170716 wutong
                     Parameter parameter = Parameter.newParameter();
                     if (DataType.isArrayType(paramNode.getType())) {
                         parameter.setIdentifier(getArrayIdentifier(paramNode.getName()));
@@ -189,11 +188,19 @@ class Project {
                     parameter.setDataType(DataType.rapTypeOfNode(paramNode.getType()));
 //                  parameter.setRemark(DataType.mockTypeOfNode(paramNode.getType()));
                     action.getRequestParameterList().add(parameter);
+                    --::end*/
+
+                    setResponseToAction(paramNode, action.getRequestParameterList());
                 }
 
+
+                /*--::start 20170716 wutong
                 IResponseWrapper responseWrapper = DocContext.getResponseWrapper();
                 Map<String, Object> resultMap = responseWrapper.wrapResponse(requestNode.getResponseNode());
                 setResultMapToAction(resultMap, action.getResponseParameterList());
+                --::end*/
+
+                setResponseToAction(requestNode.getResponseNode(), action.getResponseParameterList());
 
                 page.getActionList().add(action);
             }
